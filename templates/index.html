@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasker</title>
+</head>
+<body>
+    <h1>Задания для 11А класса</h1>
+
+    <h2>Выберите профиль</h2>
+    <form action="/tasks" method="GET">
+        <select name="profile" required>
+            <option value="ХимБио">ХимБио</option>
+            <option value="ФизМат">ФизМат</option>
+        </select>
+        <input type="submit" value="Выбрать профиль">
+    </form>
+
+    {% if profile %}
+        <h2>Выберите день недели</h2>
+        <form action="/tasks" method="GET">
+            <input type="hidden" name="profile" value="{{ profile }}">
+            <select name="day_of_week" required>
+                <option value="Понедельник">Понедельник</option>
+                <option value="Вторник">Вторник</option>
+                <option value="Среда">Среда</option>
+                <option value="Четверг">Четверг</option>
+                <option value="Пятница">Пятница</option>
+            </select>
+            <input type="submit" value="Выбрать день">
+        </form>
+    {% endif %}
+
+    {% if day_of_week %}
+        <h2>Задания на {{ day_of_week }} для профиля {{ profile }}</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>{{ task.name }}: {{ task.task_description }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
