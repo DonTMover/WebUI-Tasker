@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Задания для 11А класса</h1>
+        <div class="filter">
+            <form action="/tasks" method="GET">
+                <label>
+                    Профиль:
+                    <select name="profile" required>
+                        <option value="ХимБио">ХимБио</option>
+                        <option value="ФизМат">ФизМат</option>
+                    </select>
+                </label>
+                <label>
+                    День недели:
+                    <select name="day_of_week" required>
+                        <option value="Понедельник">Понедельник</option>
+                        <option value="Вторник">Вторник</option>
+                        <option value="Среда">Среда</option>
+                        <option value="Четверг">Четверг</option>
+                        <option value="Пятница">Пятница</option>
+                    </select>
+                </label>
+                <input type="submit" value="Показать">
+            </form>
+        </div>
+
+        {% if tasks %}
+            <h2>Задания на {{ day_of_week }} для {{ profile }}</h2>
+            {% for task in tasks %}
+                <div class="card">
+                    <h3>{{ task.name }}</h3>
+                    <p><strong>Описание:</strong> {{ task.task_description or "Нет описания" }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% if day_of_week %}
+                <p>Нет заданий на выбранный день и профиль.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

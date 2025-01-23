@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание</title>
+</head>
+<body>
+    <h1>Расписание для профиля {{ profile }}</h1>
+
+    {% for day, lessons in schedule.items() %}
+        <h2>{{ day }}</h2>
+        <ul>
+            {% for lesson in lessons %}
+                <li>
+                    {{ loop.index }}. {{ lesson.['предмет'] }}
+                    {% if lesson.кабинет %}
+                        (кабинет: {{ lesson.кабинет }})
+                    {% else %}
+                        (кабинет не указан)
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>
