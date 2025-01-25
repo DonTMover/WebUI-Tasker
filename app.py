@@ -37,7 +37,7 @@ def import_schedule_to_db(schedule):
 
 with app.app_context():
     db.create_all()
-    #import_schedule_to_db(schedule)
+    #import_schedule_to_db(schedule) #uncomment if schedule not added
 
 
 @app.route('/schedule', methods=['GET'])
